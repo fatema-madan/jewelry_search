@@ -1,3 +1,4 @@
+from pathlib import Path
 import streamlit as st
 import numpy as np
 
@@ -7,6 +8,8 @@ from sklearn.neighbors import NearestNeighbors
 from tensorflow.keras.applications import MobileNetV2
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 from tensorflow.keras.utils import img_to_array
+
+BASE_DIR = Path(__file__).resolve().parent
 
 
 # -----------------------------------
@@ -249,9 +252,14 @@ if query_image is not None:
 
                 with col:
 
-                    result_image = Image.open(
-                        image_path
-                    )
+                    stored_path = Path(str(image_path))
+
+                    category = stored_path.parent.name
+                    filename = stored_path.name
+
+                    result_path = BASE_DIR / category / filename
+
+                    result_image = Image.open(result_path)
 
                     st.image(
                         result_image,
