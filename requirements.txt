@@ -1,6 +1,5 @@
-torch
-torchvision
-faiss-cpu
 streamlit
+tensorflow
 numpy
 pillow
+scikit-learn
